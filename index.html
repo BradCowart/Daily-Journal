@@ -10,9 +10,25 @@
 <body>
     <h1>Daily Journal</h1>
     <form action="">
-        <fieldset>
+        <fieldset class="form">
             <label for="journalDate">Date</label>
             <input type="date" name="Date" id="Date">
+
+            <label for="Concepts">Concepts</label>
+            <input type=text name="Concepts" id="Concepts">
+
+            <label for="journalDate">Entry</label>
+            <textarea id="Entry" rows="3" cols="30"></textarea>
+
+            <label for="journalDate">Mood</label>
+            <select id="Mood">                      
+                <option value=Happy>Happy</li>
+                <option value="Fair">Fair</li>
+                <option value=Tired>Tired</li>
+                <option value=Distraught>Distraught</li>
+            </select>
+
+            <input type="submit" name="Submit" id="Submit">
         </fieldset>
     </form>
 </body>
