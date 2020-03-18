@@ -1,20 +1,41 @@
-import { useJournalEntries } from "./JournalDataProvider.js"
+import { useJournalEntries, getEntries } from "./JournalDataProvider.js"
 import JournalEntryComponent from "./JournalEntry.js"
 
 // DOM reference to where all entries will be rendered
-const entryLog = document.querySelector("#entryLog")
+const contentTarget = document.querySelector("#entryLog")
+
+const eventHub = document.querySelector(".container")
+
+eventHub.addEventListener("eventStateChanged", customEvent => {
+    render()
+})
+
+const render = () => {
+    getEntries().then(() => {
+        const allTheEntries = useJournalEntries()
+
+        contentTarget.innerHTML = allTheEntries.map(
+            currentEntryObject => {
+                return JournalEntryComponent(currentEntryObject)
+            }
+        ).join("")
+    })
+}
 
 const EntryListComponent = () => {
     // Use the journal entry data from the data provider component
-    const entries = useJournalEntries()
+    getEntries().then(()=> {
+        const entries = useJournalEntries()
+        for (const entry of entries) {
+            /*
+                Invoke the component that returns an
+                HTML representation of a single entry
+            */
+            entryLog.innerHTML += JournalEntryComponent(entry)
+        }
+    })
+        
 
-    for (const entry of entries) {
-        /*
-            Invoke the component that returns an
-            HTML representation of a single entry
-        */
-        entryLog.innerHTML += JournalEntryComponent(entry)
-    }
 }
 
 export default EntryListComponent
