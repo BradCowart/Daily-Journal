@@ -1,17 +1,12 @@
 {
   "entries": [
+    
     {
-      "id": 1,
-      "concept": "Introduced GitHub"
-    },
-    {
-      "id": 2,
-      "concept": "Worked with Arrays"
-    },
-    {
-      "concept": "concept",
-      "entry": "1",
-      "id": 3
+      "date": "2020-03-02",
+      "concept": "c",
+      "entry": "e",
+      "Mood": "Happy",
+      "id": 5
     }
   ]
 }
