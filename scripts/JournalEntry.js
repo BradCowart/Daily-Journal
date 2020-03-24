@@ -5,6 +5,9 @@ const JournalEntryComponent = (entry) => {
             ${entry.concept}
             ${entry.entry}
             ${entry.Mood}
+            <p>
+                <button id="deleteEvent--${entry.id}">Delete</button>
+            </p>
         </section>
     `
 }

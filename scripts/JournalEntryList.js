@@ -1,10 +1,17 @@
-import { useJournalEntries, getEntries } from "./JournalDataProvider.js"
+import { useJournalEntries, getEntries, deleteEvent } from "./JournalDataProvider.js"
 import JournalEntryComponent from "./JournalEntry.js"
 
 // DOM reference to where all entries will be rendered
 const contentTarget = document.querySelector("#entryLog")
 
 const eventHub = document.querySelector(".container")
+
+contentTarget.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id.startsWith("deleteEvent--")) {
+        const [_, eventId] = clickEvent.target.id.split("--")
+        deleteEvent(eventId)
+    }
+})
 
 eventHub.addEventListener("eventStateChanged", customEvent => {
     render()

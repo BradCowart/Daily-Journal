@@ -1,40 +1,4 @@
-/*
- *   Journal data provider for Daily Journal application
- *
- *      Holds the raw data about each entry and exports
- *      functions that other modules can use to filter
- *      the entries for different purposes.
- */
-
-// This is the original data. Can't Touch This.
-let entries = [
-   /* {
-        date: "07/24/2025",
-        concept: "HTML & CSS",
-        entry: "We talked about HTML components and how to make grid layouts with Flexbox in CSS.",
-        mood: "Tired"
-    },
-
-    {
-        date: "02/24/2020",
-        concept: "GitHub",
-        entry: "Introduced and worked with GitHub.",
-        mood: "Tired"
-    },
-    {
-        date: "02/25/2020",
-        concept: "Project 1",
-        entry: "Worked in groups to create simple web page.",
-        mood: "Tired"
-    },
-    {
-        date: "02/26/2020",
-        concept: "Dynamic javascript",
-        entry: "Introduced and worked on dynamic javascript.",
-        mood: "Tired"
-    }
-*/
-]
+let entries = []
 
 const eventHub = document.querySelector(".container")
 
@@ -56,14 +20,24 @@ export const useJournalEntries = () => {
     }
 
 export const getEntries = () => {
-    return fetch('http://localhost:3000/entries')
+    return fetch('http://localhost:8088/entries')
         .then(response => response.json())
         .then(parsedEntries => {
             entries = parsedEntries
         })
     }
-        export const saveEntry = entry => {
-            return fetch('http://localhost:3000/entries', {
+        
+    export const deleteEvent = entryId => {
+        return fetch(`http://localhost:8088/entries/${entryId}`, {
+            method: "DELETE"
+        })
+            .then(getEntries)
+            .then(dispatchStateChangeEvent)
+    }
+    
+    
+    export const saveEntry = entry => {
+            return fetch('http://localhost:8088/entries', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
